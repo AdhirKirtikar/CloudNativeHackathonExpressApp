@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app"
   },
-  "description": "CloudNativeHackathonExpressApp",
+  "description": "Cloud Native Hackathon Node.js Express App for applying filters to images",
   "author": {
     "name": ""
   },

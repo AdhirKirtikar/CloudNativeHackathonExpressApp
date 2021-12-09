@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="public\images\favicon.ico" />
     <Content Include="public\javascripts\script.js" />
     <Content Include="routes\index.js" />
     <Content Include="package.json" />
