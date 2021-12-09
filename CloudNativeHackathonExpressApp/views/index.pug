@@ -1,0 +1,148 @@
+extends layout
+
+block content
+    script(src='/javascripts/script.js')
+    center
+        canvas#canvas.main(onmouseover='mouseOverCanvas=true;' onmouseout='mouseOverCanvas=false;')
+        br
+        br
+        input#files(type='file' name='file' accept='image/*' onclick="document.getElementById('display').value='Display';" title='Click to select an image...')
+        br
+        br
+        input#display(type='button' value='Display' onclick='loadImageFile();' title='Click to load the image...')
+        input#clear(type='button' value='Clear' onclick='clearAll();' disabled='true' title='Click to clear the image...')
+        input#undo(type='button' value='Undo' onclick='undo();' disabled='true' title='Revert the last change...')
+        hr
+        #pos.pos(style='position:absolute;left:-100px;top:-100px;')
+        #status.pos(style='position:absolute;left:-100px;top:-100px;height:18px;width:100px;')
+    table(style='margin:auto;')
+        tr
+        td
+            .info
+                span#wid Width: x Pixel
+                br
+                span#hgt Height: y Pixel
+                br
+                span#nm Name: ???
+                br
+                span#tp Type: ???
+                br
+                span#sz Size: ### bytes
+                br
+                // span id=rsz>Resize: <input type="text" id="xRes" value=100 />x<input type="text" id="yRes" value=100 /><input type="button" value="Apply" onClick="resize();document.getElementById('fa').innerHTML = document.getElementById('fa').innerHTML+'Resized, ';" style="width:45px;"/></span><BR
+                span#fa Filters Applied: 
+                br
+        td
+            .buttons
+                input(type='button' value='Sharpen' onclick="backup(); sharpen();displayFilterName('Sharpen');" title='Sharpen & enhance the details of the image...')
+                input(type='button' value='Edges' onclick="backup(); edges();displayFilterName('Edge Detection');" title='Show the edges in the image...')
+                input(type='button' value='Emboss' onclick="backup(); emboss();displayFilterName('Emboss');" title='Gives the image an embossed 3D-like look...')
+                input(type='button' value='Contrasty' onclick="backup(); contrasty();displayFilterName('Contrasty');" title='Gives the image a high contrast look...')
+                br
+                input(type='button' value='Blur' onclick="backup(); gausblur();displayFilterName('Gaussian Blur');" title='Blurs the image...')
+                input(type='button' value='Averaging' onclick="backup(); averaging();displayFilterName('Averaging');" title='Blurs the image more...')
+                input(type='button' value='Painting' onclick="backup(); median();displayFilterName('Painting');" title='Gives the image a painting like look...')
+                input(type='button' value='Dreamy' onclick="backup(); contrasty(); mosaic(1); sharpen();sharpen();displayFilterName('Dreamy');" title='Gives the image a dreamy look...')
+                br
+                input(type='button' value='Mosaic 1' onclick="backup(); mosaic(1); displayFilterName('Mosaic(1)');" title='Applies a mosaic effect with 1 grain...')
+                input(type='button' value='Mosaic 2' onclick="backup(); mosaic(2); displayFilterName('Mosaic(2)');" title='Applies a mosaic effect with 2 grain...')
+                input(type='button' value='Mosaic 3' onclick="backup(); mosaic(3); displayFilterName('Mosaic(3)');" title='Applies a mosaic effect with 3 grain...')
+                input(type='button' value='Vignette' onclick="backup(); vignette(); displayFilterName('Vignette');" title='Applies a vignette effect with blackened corners...')
+                br
+                input(type='button' value='Invert' onclick="backup(); invert(); displayFilterName('Invert');" title='Inverts all the colors in the image...')
+                input(type='button' value='Sepia' onclick="backup(); sepia(); displayFilterName('Sepia');" title='Gives the image a Sepia tone...')
+                input(type='button' value='Histogram' onclick="histogram(); displayFilterName('Displayed Histogram');" title='Shows the Histogram of the image below...')
+                input#tr(type='button' value='Transparent' title='Click to toggle transparency...' onclick="if(!transparency) { document.getElementById('tr').title='Transparency ON - Click to toggle transparency...'; document.getElementById('canvas').style.cursor='crosshair'; transparency=true; document.getElementById('tr').style.color='Blue';} else { document.getElementById('tr').title='Transparency OFF - Click to toggle transparency...'; document.getElementById('canvas').style.cursor='auto'; transparency=false; document.getElementById('tr').style.color='Black';}")
+                br
+                input(type='button' value='Flip (Hor)' onclick="backup(); flip('h'); displayFilterName('Flip Horizontally');" title='Flips the image horizontally...')
+                input(type='button' value='Flip (Vert)' onclick="backup(); flip('v'); displayFilterName('Flip Vertically');" title='Flips the image vertically...')
+                input(type='button' value='GrayScale' onclick="backup(); grayscale(); displayFilterName('GrayScale');" title='Converts the image to Grayscale...')
+                input#bw(type='button' value="Black'n'White" title='Click to toggle Black & White mode...' onclick="if(!bnw) { document.getElementById('bnwchannels').hidden=false; document.getElementById('bw').title='Black n White ON - Click to toggle...'; bnw=true; document.getElementById('bw').style.color='Blue';} else { document.getElementById('bnwchannels').hidden=true; document.getElementById('bw').title='Black n White OFF - Click to toggle...'; bnw=false; document.getElementById('bw').style.color='Black';}")
+                br
+                input#cartoon(type='button' value='Cartoon' onclick='cartoon();' title='Gives the image a cartoon effect...')
+                input#sketch(type='button' value='Sketch' onclick='sketch();' title='Gives the image a sketched effect...')
+                input#ASCIIfy(type='button' value='ASCIIfy' onclick='ASCIIfy();' disabled='' title='Gives the image an ASCII effect...')
+                input#resize(type='button' value='Resize' onclick='resize();' disabled='' title='Resizes the image...')
+                table
+                    tr
+                    td Alpha: 
+                    td
+                        input(type='button' value='+' onclick="backup(); alpha(1); displayFilterName('Alpha(+1)');" style='width:20px;' title='Increase the transparency of the whole image...')
+                    td
+                        input(type='button' value='-' onclick="backup(); alpha(-1); displayFilterName('Alpha(-1)');" style='width:20px;' title='Decrease the transparency of the whole image...')
+                    td
+                    td Brightness: 
+                    td
+                        input(type='button' value='+' onclick="backup(); brightness(1.1); displayFilterName('Brightness(+1)');" style='width:20px;' title='Increase the brightness of the image...')
+                    td
+                        input(type='button' value='-' onclick="backup(); brightness(0.9); displayFilterName('Brightness(-1)');" style='width:20px;' title='Decrease the brightness of the image...')
+                    td
+                    td Contrast: 
+                    td
+                        input(type='button' value='+' onclick="backup(); contrast(10); displayFilterName('Contrast(+1)');" style='width:20px;' title='Increase the contrast of the image...')
+                    td
+                        input(type='button' value='-' onclick="backup(); contrast(-10); displayFilterName('Contrast(-1)');" style='width:20px;' title='Decrease the contrast of the image...')
+                    tr
+                    td Overlay:
+                    td(colspan='3')
+                        input#chR(type='radio' name='channels' checked='' value='Red' onchange="document.getElementById('chVal').style.background='-webkit-linear-gradient(left, White, Red)';backup();displayFilterName('Overlay (Red)');" title='Put a Red colored overlay on the image...')
+                        | Red
+                    td(colspan='1')
+                        input#chG(type='radio' name='channels' value='Green' onchange="document.getElementById('chVal').style.background='-webkit-linear-gradient(left, White, Green)';backup();displayFilterName('Overlay (Green)');" title='Put a Green colored overlay on the image...')
+                        | Green
+                    td(colspan='3')
+                        input#chB(type='radio' name='channels' value='Blue' onchange="document.getElementById('chVal').style.background='-webkit-linear-gradient(left, White, Blue)';backup();displayFilterName('Overlay (Blue)');" title='Put a Blue colored overlay on the image...')
+                        | Blue
+                    td(colspan='3')
+                        input#chVal(type='range' min='0' max='255' value='128' step='10' onchange='overlay(this.value);' title='Set the intensity of the overlay...')
+                    tr
+                    td Extract:
+                    td(colspan='3')
+                        input#chExR(type='radio' name='channels' checked='' value='Red' title='Extract Red color only from the image...')
+                        | Red
+                    td(colspan='1')
+                        input#chExG(type='radio' name='channels' value='Green' title='Extract Green color only from the image...')
+                        | Green
+                    td(colspan='3')
+                        input#chExB(type='radio' name='channels' value='Blue' title='Extract Blue color only from the image...')
+                        | Blue
+                    td(colspan='3')
+                        input(type='button' value='Extract' onclick='extract();')
+                center
+                    span#output
+        td
+            #bnwchannels.bnwchannels(hidden='true')
+                table
+                    tr
+                    td Channels:
+                    tr
+                    td
+                        | Red
+                    td(colspan='3')
+                        input#chBnWRVal(type='range' min='0' max='10' value='5' step='1' title='Set the value for Red channel...' onchange='setColor();')
+                    tr
+                    td
+                        | Green
+                    td(colspan='3')
+                        input#chBnWGVal(type='range' min='0' max='10' value='5' step='1' title='Set the value for Green channel...' onchange='setColor();')
+                    tr
+                    td
+                        | Blue
+                    td(colspan='3')
+                        input#chBnWBVal(type='range' min='0' max='10' value='5' step='1' title='Set the value for Blue channel...' onchange='setColor();')
+                    tr
+                    td RGB
+                    td#colR(style='color:Red;') 0.33
+                    td#colG(style='color:Green;') 0.33
+                    td#colB(style='color:Blue;') 0.33
+                    tr
+                    td(colspan='4')
+                        center
+                            input(type='button' value='Process' onclick="backup(); blacknwhite(); displayFilterName('Black & White');" title='Convert to Black n White based on the above channels...')
+    hr
+    center
+        canvas#histRGB.hist(width='255' height='100' title='Shows the RGB Histogram of the image...')
+        canvas#histGray.hist(width='255' height='100' title='Shows the Grayscale Histogram of the image...')
+    br
+    br
+    #asciidiv.ascii

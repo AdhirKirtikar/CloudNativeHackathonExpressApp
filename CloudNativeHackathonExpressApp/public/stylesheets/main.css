@@ -1,0 +1,165 @@
+canvas.main {
+  border: 1px Solid Black;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 2px 2px 4px Gray;
+}
+
+canvas.hist {
+  border: 1px Solid Black;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: 2px 2px 4px Gray;
+  border-radius: 3px;
+}
+
+body {
+  font-family: Candara;
+  font-size: 80%;
+}
+
+div.pos {
+  height: 18px;
+  width: 220px;
+  border-width: 1px;
+  border-style: solid;
+  color: Blue;
+  border-color: Blue;
+  border-radius: 3px;
+  padding: 2px;
+  background-color: LightBlue;
+  box-shadow: 2px 2px 4px Gray;
+  z-index: 100;
+  opacity: 0.7;
+}
+
+div.info {
+  height: 230px;
+  width: 230px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(50, 50, 50);
+  border-radius: 3px;
+  padding: 5px;
+  background-color: White;
+  box-shadow: 2px 2px 4px Gray;
+}
+
+div.buttons {
+  height: 230px;
+  width: 330px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(50, 50, 50);
+  border-radius: 3px;
+  padding: 5px;
+  line-height: 0.8em;
+  background-color: White;
+  box-shadow: 2px 2px 4px Gray;
+}
+
+div.bnwchannels {
+  height: 230px;
+  width: 230px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(50, 50, 50);
+  border-radius: 3px;
+  padding: 5px;
+  background-color: White;
+  box-shadow: 2px 2px 4px Gray;
+}
+
+input[type="button"] {
+  font-family: Candara;
+  width: 80px;
+}
+
+input.flip {
+  font-family: Candara;
+  width: 163px;
+}
+
+input[type="file"] {
+  font-family: Candara;
+  width: 230px;
+}
+
+input[type="text"] {
+  font-family: Candara;
+  width: 35px;
+  border: 1px White Solid;
+  text-align: center;
+  height: 15px;
+}
+
+input[type="range"] {
+  font-family: Candara;
+  width: 85px;
+  background: -webkit-linear-gradient(left, White, Red);
+  border: 1px solid Gray;
+  border-radius: 8px;
+  border-top-color: rgba(0, 0, 0, 0.34);
+  box-shadow: 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.13) inset;
+  box-sizing: border-box;
+  -webkit-appearance: none !important;
+  text-align: center;
+  height: 15px;
+  appearance: none;
+}
+
+input[type="range"]#chBnWRVal {
+  font-family: Candara;
+  width: 85px;
+  background: -webkit-linear-gradient(left, White, Red);
+  border: 1px solid Gray;
+  border-radius: 8px;
+  border-top-color: rgba(0, 0, 0, 0.34);
+  box-shadow: 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.13) inset;
+  box-sizing: border-box;
+  -webkit-appearance: none !important;
+  text-align: center;
+  height: 15px;
+  appearance: none;
+}
+
+input[type="range"]#chBnWGVal {
+  font-family: Candara;
+  width: 85px;
+  background: -webkit-linear-gradient(left, White, Green);
+  border: 1px solid Gray;
+  border-radius: 8px;
+  border-top-color: rgba(0, 0, 0, 0.34);
+  box-shadow: 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.13) inset;
+  box-sizing: border-box;
+  -webkit-appearance: none !important;
+  text-align: center;
+  height: 15px;
+  appearance: none;
+}
+
+input[type="range"]#chBnWBVal {
+  font-family: Candara;
+  width: 85px;
+  background: -webkit-linear-gradient(left, White, Blue);
+  border: 1px solid Gray;
+  border-radius: 8px;
+  border-top-color: rgba(0, 0, 0, 0.34);
+  box-shadow: 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.13) inset;
+  box-sizing: border-box;
+  -webkit-appearance: none !important;
+  text-align: center;
+  height: 15px;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 14px;
+  height: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.34);
+  box-shadow: 0 1px white inset, 0 1px rgba(0, 0, 0, 0.13);
+}
+
+div.ascii {
+  line-height: 50%;
+}
