@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <None Include="Properties\PublishProfiles\registry.hub.docker.com_adhirkirtikar.pubxml" />
     <Content Include="public\images\favicon.ico" />
     <Content Include="public\javascripts\script.js" />
     <Content Include="routes\index.js" />
@@ -41,6 +42,8 @@
     <Content Include="views\error.pug" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
