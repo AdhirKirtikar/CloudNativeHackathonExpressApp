@@ -33,13 +33,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
+        name: Build and push versioned tag
         uses: docker/build-push-action@v2
         with:
           context: ./CloudNativeHackathonExpressApp
           platforms: linux/amd64
           push: true
           tags: adhirkirtikar/cloudnativehackathonexpressapp:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+      -
+        name: Build and push latest tag
+        uses: docker/build-push-action@v2
+        with:
+          context: ./CloudNativeHackathonExpressApp
+          platforms: linux/amd64
+          push: true
+          tags: adhirkirtikar/cloudnativehackathonexpressapp:latest         
       -
         name: Update Minor version
         uses: hmanzur/actions-set-secret@v2.0.0
