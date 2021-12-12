@@ -24,3 +24,17 @@ jobs:
         shell: bash
         run: |
           echo $((${{ secrets.MAJOR }}+1)) $((${{ secrets.MINOR }}+1))
+      -
+        name: Update Minor version
+        uses: hmanzur/actions-set-secret@v2.0.0
+        with:
+          name: 'MINOR'
+          value: $((${{ secrets.MINOR }}+1))
+          repository: AdhirKirtikar/CloudNativeHackathonExpressApp
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}   
+      -
+        name: Show Major & Minor Version
+        shell: bash
+        run: |
+          echo $((${{ secrets.MAJOR }}+1)) $((${{ secrets.MINOR }}+1))
+          echo adhirkirtikar/cloudnativehackathonexpressapp:${{ secrets.MAJOR }}.${{ secrets.MINOR }}          
