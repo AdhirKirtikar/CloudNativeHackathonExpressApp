@@ -1,5 +1,5 @@
 namespace:
-  name: demo
+  name: cnhea
  
 service:
   port: 3000
@@ -7,10 +7,10 @@ service:
 
 image:
   repository: adhirkirtikar/cloudnativehackathonexpressapp 
-  tag: 0.1
+  tag: 0.15
   pullPolicy: IfNotPresent
 
-replicaCount: 1
+replicaCount: 3
 
 resources:
   requests:
@@ -18,4 +18,4 @@ resources:
     memory: 256Mi
 
 configmap:
-  data: "version: 0.1"
+  data: "version: 0.15"
