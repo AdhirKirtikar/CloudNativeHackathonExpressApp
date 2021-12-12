@@ -7,7 +7,7 @@ service:
 
 image:
   repository: adhirkirtikar/cloudnativehackathonexpressapp 
-  tag: 0.15
+  tag: 0.16
   pullPolicy: IfNotPresent
 
 replicaCount: 3
@@ -18,4 +18,4 @@ resources:
     memory: 256Mi
 
 configmap:
-  data: "version: 0.15"
+  data: "version: 0.16"
