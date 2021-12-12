@@ -7,7 +7,7 @@ service:
 
 image:
   repository: adhirkirtikar/cloudnativehackathonexpressapp 
-  tag: 0.19
+  tag: 0.18
   pullPolicy: IfNotPresent
 
 replicaCount: 5
