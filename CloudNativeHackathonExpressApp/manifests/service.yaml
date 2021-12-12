@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cnhea
+  namespace: cnhea
+spec:
+  selector:
+    app: cnhea
+  ports:
+    - protocol: TCP
+      port: 3000 

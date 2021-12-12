@@ -1,0 +1,21 @@
+namespace:
+  name: cnhea 
+ 
+service:
+  port: 3000
+  type: ClusterIP
+
+image:
+  repository: adhirkirtikar/cloudnativehackathonexpressapp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 70m
+    memory: 256Mi
+
+configmap:
+  data: "version: 1.0.0"

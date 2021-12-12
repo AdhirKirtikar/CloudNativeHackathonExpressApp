@@ -1,0 +1,21 @@
+namespace:
+  name: demo
+ 
+service:
+  port: 3000
+  type: ClusterIP
+
+image:
+  repository: adhirkirtikar/cloudnativehackathonexpressapp 
+  tag: 0.1
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+
+configmap:
+  data: "version: 0.1"

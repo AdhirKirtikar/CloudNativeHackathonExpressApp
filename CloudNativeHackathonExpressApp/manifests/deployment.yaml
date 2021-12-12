@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cnhea
+    tag: latest
+  name: cnhea
+  namespace: cnhea
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cnhea
+      tag: latest
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cnhea
+        tag: latest
+    spec:
+      containers:
+      - image: adhirkirtikar/cloudnativehackathonexpressapp:latest
+        imagePullPolicy: IfNotPresent
+        name: cnhea
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
