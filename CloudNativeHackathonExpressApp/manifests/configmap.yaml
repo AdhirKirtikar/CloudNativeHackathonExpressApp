@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  version: latest
-kind: ConfigMap
-metadata:
-  name: cnhea-version
-  namespace: cnhea
