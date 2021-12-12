@@ -56,3 +56,11 @@ jobs:
           value: $((${{ secrets.MINOR }}+1))
           repository: AdhirKirtikar/CloudNativeHackathonExpressApp
           token: ${{ secrets.REPO_ACCESS_TOKEN }}          
+      -
+        name: Show Major & Minor Version
+        shell: bash
+        env:
+          MAJ: $((${{ secrets.MAJOR }}+1))
+          MIN: $((${{ secrets.MINOR }}+1))
+        run: |
+          echo "$MAJ" "$MIN"
